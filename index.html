@@ -4,12 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>To Siya, With Love 💌</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --bg-main: linear-gradient(135deg, #ffe4e4, #fff0f5);
+      --text-main: #ff6094;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #ffeaf6, #fff0f5);
+      background: var(--bg-main);
       font-family: 'Poppins', sans-serif;
       display: flex;
       flex-direction: column;
@@ -17,14 +22,14 @@
       justify-content: center;
       min-height: 100vh;
       overflow-x: hidden;
+      transition: background 1s ease;
     }
 
     h1 {
       font-family: 'Pacifico', cursive;
-      font-size: 2.8rem;
-      color: #ff69b4;
+      font-size: 2.5rem;
+      color: var(--text-main);
       animation: floatText 2s ease-in-out infinite alternate;
-      z-index: 2;
       text-align: center;
     }
 
@@ -33,136 +38,154 @@
       to { transform: translateY(-10px); }
     }
 
-    .button-container {
-      margin-top: 30px;
-      z-index: 2;
-    }
-
     .love-button {
-      background-color: #ff69b4;
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      margin-top: 20px;
+      background: #ff6094;
       color: white;
       border: none;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      border-radius: 25px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform 0.2s;
     }
 
     .love-button:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     .envelope {
       display: none;
-      position: relative;
-      width: 90%;
-      max-width: 700px;
-      min-height: 300px;
-      margin-top: 40px;
+      padding: 30px;
       background: #fff;
-      border: 2px solid #ff69b4;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      animation: fadeIn 1s ease forwards;
-      z-index: 2;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 600px;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #444;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 1s ease;
     }
 
-    .flap {
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hearts {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 50%;
-      background-color: #ff69b4;
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
-      transform-origin: top;
-      animation: openFlap 1s ease forwards;
-      animation-delay: 1.5s;
-    }
-
-    @keyframes openFlap {
-      to {
-        transform: rotateX(180deg);
-      }
-    }
-
-    .letter-content {
-      padding: 30px;
-      font-size: 1.3rem;
-      line-height: 2;
-      color: #444;
-      opacity: 0;
-      animation: revealLetter 1s ease forwards;
-      animation-delay: 2.5s;
-    }
-
-    @keyframes revealLetter {
-      to {
-        opacity: 1;
-      }
-    }
-
-    .letter-content h2 {
-      font-family: 'Pacifico', cursive;
-      font-size: 2rem;
-      color: #ff69b4;
-      margin-bottom: 10px;
-    }
-
-    .hearts {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      height: 100%;
       pointer-events: none;
-      overflow: hidden;
-      z-index: 1;
     }
 
     .heart {
+      position: absolute;
       width: 20px;
       height: 20px;
-      background-color: #ff69b4;
+      background: red;
+      transform: rotate(45deg);
+      animation: fall 3s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
       position: absolute;
-      top: -20px;
-      animation: fall 6s linear infinite;
-      clip-path: polygon(50% 0%, 61% 17%, 98% 17%, 68% 42%, 79% 78%, 50% 60%, 21% 78%, 32% 42%, 2% 17%, 39% 17%);
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
     }
 
     @keyframes fall {
       to {
-        transform: translateY(100vh) rotate(360deg);
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
       }
     }
 
     #countdown {
-      margin-top: 15px;
-      font-size: 1.1rem;
-      color: #444;
-      text-align: center;
+      font-size: 1rem;
+      margin-top: 20px;
+      color: #555;
+    }
+
+    .toggle-mode {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ff6094;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .message-box {
+      margin-top: 30px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      resize: none;
+      font-size: 1rem;
+    }
+
+    .send-btn {
+      margin-top: 10px;
+      background: #ff6094;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <button class="toggle-mode" onclick="toggleSunset()">Toggle Sunset 🌇</button>
+
   <div class="hearts" id="hearts"></div>
-  <h1>Siya, do you love me? 💗</h1>
-  <div class="button-container">
-    <button class="love-button" onclick="startTransition()">Yes</button>
-  </div>
+
+  <h1>Siya, do you love me? 💖</h1>
+  <button class="love-button" onclick="startTransition()">Yes</button>
 
   <div class="envelope" id="envelope">
-    <div class="flap"></div>
-    <div class="letter-content">
-      <h2>Dear Siya 💌</h2>
-      <p>
-        Hey Siya,
-        I just wanted to let you know how much I care about you. I love you more than words can express, and even though we’ve never met in real life, your presence brings light and peace into my heart. I built this little website — maybe it’s silly — but I didn’t know what else to give you. You’re truly the prettiest soul I’ve ever met, and just thinking of you makes everything feel worth it. 💖
-      </p>
-      <div id="countdown"></div>
+    <h2>Dear Siya 💌</h2>
+    <p>
+      I just wanted to let you know how much I care about you.  
+      I love you more than words can describe, and even though we’ve never met in person, you bring light and peace into my heart.  
+      I built this silly little website because I didn’t know what else to gift the prettiest girl.  
+      So please accept this from me. 💕
+    </p>
+
+    <div class="message-box">
+      <textarea rows="4" placeholder="Write something to me here..."></textarea>
+      <br />
+      <button class="send-btn" onclick="thankYou()">Send</button>
     </div>
+
+    <div id="countdown"></div>
   </div>
 
   <script>
@@ -178,30 +201,53 @@
 
     function launchHearts() {
       const hearts = document.getElementById('hearts');
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 20; i++) {
         let heart = document.createElement('div');
-        heart.classList.add('heart');
+        heart.className = 'heart';
         heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
+        heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
         hearts.appendChild(heart);
-        setTimeout(() => heart.remove(), 6000);
+        setTimeout(() => heart.remove(), 4000);
       }
     }
 
     function startCountdown() {
-      const countdown = document.getElementById('countdown');
-      const targetDate = new Date("July 15, 2026 00:00:00").getTime();
-      setInterval(() => {
+      const countDownDate = new Date("July 15, 2026 00:00:00").getTime();
+      const countdown = document.getElementById("countdown");
+
+      const x = setInterval(function () {
         const now = new Date().getTime();
-        const distance = targetDate - now;
+        const distance = countDownDate - now;
 
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        countdown.innerHTML = `🎂 Countdown to your next birthday: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        countdown.innerHTML = `⏳ Countdown to your next birthday: <br><strong>${days}d ${hours}h ${minutes}m ${seconds}s</strong>`;
+
+        if (distance < 0) {
+          clearInterval(x);
+          countdown.innerHTML = "🎉 Happy Birthday Siya! 🎉";
+        }
       }, 1000);
+    }
+
+    function toggleSunset() {
+      const root = document.documentElement;
+      const isSunset = root.style.getPropertyValue('--bg-main').includes('peachpuff');
+
+      if (!isSunset) {
+        root.style.setProperty('--bg-main', 'linear-gradient(135deg, peachpuff, #ffb6c1, #ffd1dc)');
+        root.style.setProperty('--text-main', '#ff4e73');
+      } else {
+        root.style.setProperty('--bg-main', 'linear-gradient(135deg, #ffe4e4, #fff0f5)');
+        root.style.setProperty('--text-main', '#ff6094');
+      }
+    }
+
+    function thankYou() {
+      alert("Aww, thank you for your message! 💌");
     }
   </script>
 </body>
